@@ -3,9 +3,9 @@ A full-stack saree e-commerce web app built with React (frontend) and Node/Expre
 Includes product listing, filters, cart, and API backend.
 
 # Run locally
-git clone https://github.com/Subham-Bose/saree-store.git
-npm install
-npm run dev
+* git clone https://github.com/Subham-Bose/saree-store.git
+* npm install
+* npm run dev
 
 # Tech Stack
 * React + TypeScript (client)
