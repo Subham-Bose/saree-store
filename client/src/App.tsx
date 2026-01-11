@@ -3,14 +3,32 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/lib/auth-context";
+import { CartProvider } from "@/lib/cart-context";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import Home from "@/pages/home";
+import Products from "@/pages/products";
+import ProductDetail from "@/pages/product-detail";
+import Cart from "@/pages/cart";
+import Checkout from "@/pages/checkout";
+import Login from "@/pages/login";
+import Register from "@/pages/register";
+import Account from "@/pages/account";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
+      <Route path="/" component={Home} />
+      <Route path="/products" component={Products} />
+      <Route path="/products/:id" component={ProductDetail} />
+      <Route path="/cart" component={Cart} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/account" component={Account} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -19,10 +37,22 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            <TooltipProvider>
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-1">
+                  <Router />
+                </main>
+                <Footer />
+              </div>
+              <Toaster />
+            </TooltipProvider>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
